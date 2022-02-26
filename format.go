@@ -156,6 +156,15 @@ func FormatFromExtension(ext string) (Format, error) {
 	return -1, errors.New("unsupported image format")
 }
 
+func StringOfFormat(f Format) (string, error) {
+	str, ok := formatExts[f]
+	if !ok {
+		return "", errors.New("no such format")
+	}
+
+	return str, nil
+}
+
 func setFormat(filename string, options ...EncodeOption) (fo FormatOption, err error) {
 	var format Format
 	if format, err = FormatFromExtension(filename); err != nil {
